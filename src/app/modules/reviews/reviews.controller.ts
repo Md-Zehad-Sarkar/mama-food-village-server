@@ -4,6 +4,7 @@ import { reviewsServices } from './reviews.services';
 
 const getAllReviews = catchAsync(async (req, res) => {
   const result = await reviewsServices.getAllReviewsFromDB();
+  // send response
   sendResponse(res, {
     statusCode: 200,
     success: true,
