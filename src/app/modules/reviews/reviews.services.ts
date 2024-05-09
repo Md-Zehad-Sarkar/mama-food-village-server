@@ -1,8 +1,12 @@
 import { Review } from './reviews.model';
 
 const getAllReviewsFromDB = async () => {
-  const result = await Review.find();
-  return result;
+  try {
+    const result = await Review.find();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const reviewsServices = { getAllReviewsFromDB };
