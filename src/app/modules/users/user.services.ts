@@ -24,7 +24,14 @@ const createUserIntoDB = async (user: IUser) => {
   user.password = await bcrypt.hash(user.password, Number(config.BCRYPT_SALT));
 
   //set user role
-  user.role = 'Consumer';
+  if (user.role && user.role === 'Admin') {
+    user.role = 'Admin';
+  } else {
+    user.role = 'Consumer';
+  }
+
+  //user status existing set
+  user.isDeleted = false;
 
   const result = await User.create(user);
   return result;

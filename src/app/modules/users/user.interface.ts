@@ -4,4 +4,5 @@ export interface IUser {
   password: string;
   contact: string;
   role?: 'Admin' | 'Consumer';
+  isDeleted?:boolean;
 }
