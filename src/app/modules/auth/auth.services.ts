@@ -7,10 +7,10 @@ import { createToken } from './auth.utls';
 import config from '../../config';
 
 const loginUser = async (payload: TLoginUser) => {
-  const user = await User.findOne({ email: payload.email });
-  // const existUserEmail = await User.findOne({ email: payload.email });
-
-  // const existUserPhone = await User.findOne({ contact: payload.phone });
+  const { email, phone } = payload;
+  const user = await User.findOne({
+    $or: [{ email: email }, { contact: phone }],
+  });
 
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, 'This User is Not Found !');
@@ -45,7 +45,7 @@ const loginUser = async (payload: TLoginUser) => {
     config.Jwt_Access_Expires_In as string,
   );
 
-  return accessToken;
+  return { accessToken };
 };
 
 export const authService = { loginUser };
