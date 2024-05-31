@@ -6,8 +6,9 @@ import { RequestHandler } from 'express';
 
 const createUser: RequestHandler = catchAsync(async (req, res) => {
   const body = req.body;
-  
+
   const result = await userService.createUserIntoDB(body);
+
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,

@@ -12,7 +12,7 @@ export const userValidationSchema = z.object({
       .max(26, 'Name must be at most 26 characters long'),
     email: z
       .string({
-        required_error: 'Email is required',
+        required_error: 'Email must be valid email with gmail/yahoo/outlook',
         invalid_type_error:
           'Email must be valid email with gmail/yahoo/outlook',
       })
@@ -35,7 +35,7 @@ export const userValidationSchema = z.object({
         /[!@#$%^&*(),.?":{}|<>]/,
         'Password must include at least one special character',
       ),
-    contact: z.string().max(11).regex(phoneRegex, 'invalid contact number'),
+    contact: z.string().min(10).max(14).regex(phoneRegex, 'invalid contact number'),
     role: z.enum(['Admin', 'Consumer']).optional(),
   }),
 });

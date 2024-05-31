@@ -9,7 +9,7 @@ export const port = config.Port || 5000;
 export const app: Application = express();
 
 //middleware
-app.use(cors());
+app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
 app.use(express.json()); // parser
 
 //routes
