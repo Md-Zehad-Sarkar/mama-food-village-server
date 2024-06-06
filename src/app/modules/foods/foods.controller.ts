@@ -13,4 +13,16 @@ const getAllFoods = catchAsync(async (req, res) => {
   });
 });
 
-export const foodsController = { getAllFoods };
+const getSingleFood = catchAsync(async (req, res) => {
+  const { foodId } = req.params;
+  const result = await foodServices.getSingleFoodFromDB(foodId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Single food retrieved success',
+    data: result,
+  });
+});
+
+export const foodsController = { getAllFoods, getSingleFood };
